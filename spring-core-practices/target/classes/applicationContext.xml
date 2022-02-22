@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    					 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<!-- Annotation based config starts -->
+
+	<context:annotation-config />
+	<context:component-scan
+		base-package="com.sivasankar.springcore.practices" />
+
+
+	<!-- Annotation based config ends -->
+
+
+
+
+
+	<!-- XML based config starts -->
+
+
+	<!-- Constructor Injection -->
+
+	<bean id="helloWorldBean"
+		class="com.sivasankar.springcore.practices.HelloWorld">
+		<property name="message" value="Hello World!" />
+	</bean>
+
+	<bean id="customerBean"
+		class="com.sivasankar.springcore.practices.xmlconfig.ioc.Customer">
+		<property name="name" value="Sivasankar Thalavai"></property>
+	</bean>
+
+	<bean id="addressBean"
+		class="com.sivasankar.springcore.practices.xmlconfig.di.constructor.Address">
+		<constructor-arg value="40-R"></constructor-arg>
+		<constructor-arg value="Chennai"></constructor-arg>
+		<constructor-arg value="Tamilnadu"></constructor-arg>
+		<constructor-arg value="India"></constructor-arg>
+	</bean>
+
+	<bean id="employeeBean"
+		class="com.sivasankar.springcore.practices.xmlconfig.di.constructor.Employee">
+		<constructor-arg value="10"></constructor-arg>
+		<constructor-arg value="Sivasankar Thalavai"></constructor-arg>
+		<constructor-arg>
+			<ref bean="addressBean" />
+		</constructor-arg>
+	</bean>
+
+	<!-- <bean id="employeeInheritAddressBean1" class="com.sivasankar.di.injection.constructor.Employee" 
+		parent="employeeBean"> <constructor-arg ref="addressBean"></constructor-arg> 
+		</bean> -->
+
+	<bean id="answerBean1"
+		class="com.sivasankar.springcore.practices.xmlconfig.di.constructor.Answer">
+		<constructor-arg value="1"></constructor-arg>
+		<constructor-arg
+			value="Java is a programming language"></constructor-arg>
+		<constructor-arg value="John"></constructor-arg>
+	</bean>
+
+	<bean id="answerBean2"
+		class="com.sivasankar.springcore.practices.xmlconfig.di.constructor.Answer">
+		<constructor-arg value="2"></constructor-arg>
+		<constructor-arg value="Java is a Platform"></constructor-arg>
+		<constructor-arg value="Rod"></constructor-arg>
+	</bean>
+
+	<bean id="questionBean"
+		class="com.sivasankar.springcore.practices.xmlconfig.di.constructor.Question">
+		<constructor-arg value="1001"></constructor-arg>
+		<constructor-arg value="What is java?"></constructor-arg>
+		<constructor-arg>
+
+			<!-- <list> <value>Java is a programming language</value> <value>Java 
+				is a Platform</value> <value>Java is an Island of Indonasia</value> </list> -->
+
+			<list>
+				<ref bean="answerBean1" />
+				<ref bean="answerBean2" />
+			</list>
+
+			<!-- <map> <entry key="Java is a Programming Language" value="John Rod"></entry> 
+				<entry key="Java is a Platform" value="Siva"></entry> <entry key="Java is 
+				an Island" value="Dennis"></entry> </map> <map> <entry key-ref="answerBean3" 
+				value-ref="user1"></entry> <entry key-ref="answerBean4" value-ref="user2"></entry> 
+				</map> -->
+
+
+		</constructor-arg>
+
+	</bean>
+
+
+	<!-- Setter Injection -->
+
+	<bean id="customerSetterBean"
+		class="com.sivasankar.springcore.practices.xmlconfig.di.setter.Customer1">
+		<property name="id" value="101"></property>
+		<property name="name" value="Sivasankar Thalavai"></property>
+		<property name="city" value="Chennai"></property>
+	</bean>
+
+
+</beans>
